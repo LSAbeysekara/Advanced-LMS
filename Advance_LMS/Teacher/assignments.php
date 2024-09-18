@@ -3,7 +3,7 @@ session_start();
 
 
  if (!isset($_SESSION['teacher_name'])) {
-    echo "<script> window.location.replace('http://localhost:3000/t_login'); </script>";
+    echo "<script> window.location.replace('http://localhost:3000/login'); </script>";
   } else {
   
     ?>

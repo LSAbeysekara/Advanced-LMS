@@ -13,7 +13,7 @@ if ($conn->connect_error) {
 
 $query = "SELECT c.`c_id`, c.`c_name`, c.`c_type`, t.`name` AS `teacher_name`, c.`status`
 FROM `tb_courses` c
-JOIN `tb_teacher` t ON c.`t_id` = t.`tchr_id`;
+JOIN `tb_teacher` t ON c.`t_id` = t.`tchr_id` WHERE `c_type`='lms';
 ";
 $result = mysqli_query($conn, $query);
 

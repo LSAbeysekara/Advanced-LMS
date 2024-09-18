@@ -4,7 +4,7 @@ session_start();
 
 
  if (!isset($_SESSION['teacher_name'])) {
-    echo "<script> window.location.replace('http://localhost:3000/t_login'); </script>";
+    echo "<script> window.location.replace('http://localhost:3000/login'); </script>";
   } else {
     $c_id = $_GET['id'];
     ?>
@@ -16,8 +16,7 @@ session_start();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     
-    <!-- theme meta -->
-    <meta name="theme-name" content="quixlab" />
+   
   
     <title>Edit Lesson</title>
     <!-- Favicon icon -->

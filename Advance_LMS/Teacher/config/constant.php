@@ -2,7 +2,7 @@
 
 
 
-define('SITEURL', 'http://localhost/OIMS/index.php');
+
 define('LOCALHOST', 'localhost');
 define('DB_USERNAME', 'root');
 define('DB_PASSWORD', '');

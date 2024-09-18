@@ -40,7 +40,31 @@ include('config/constant.php');
     <!--*******************
         Preloader end
     ********************-->
+    <?php if (isset($_SESSION['add-error'])) {
+        if ($_SESSION['add-error']=="success") { 
+        ?>
+            <script>
+                Swal.fire(
+                    'Success!',
+                    'Lesson has been added.',
+                    'success'
+                );
+            </script>
+                
+        <?php 
+    unset($_SESSION['add-error']);
+    }else{?>
 
+<script>
+                Swal.fire(
+                    'erroe!',
+                    'Lesson adding the course.',
+                    'error'
+                );
+            </script>
+
+        <?php 
+    unset($_SESSION['add-error']); } }?>
     
     <!--**********************************
         Main wrapper start

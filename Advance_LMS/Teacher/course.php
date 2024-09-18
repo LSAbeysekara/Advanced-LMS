@@ -3,7 +3,7 @@ session_start();
 
 
  if (!isset($_SESSION['teacher_name'])) {
-    echo "<script> window.location.replace('http://localhost:3000/t_login'); </script>";
+    echo "<script> window.location.replace('http://localhost:3000/login'); </script>";
   } else {
   
     ?>
@@ -172,7 +172,8 @@ while ($row = $result->fetch_assoc()) {
                     "createdRow": function(row, data, dataIndex) {
                         $j(row).find('.view-btn').on('click', function() {
                             var file = data.file;
-                            window.location.href = 'lesson_view.php?id=' + file;
+                            var c_id = data.c_id;
+                            window.location.href = 'lesson_view.php?id=' + file + '&c_id=' + data.c_id;
                         });
 
                         $j(row).find('.edit-btn').on('click', function() {

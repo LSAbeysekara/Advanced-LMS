@@ -9,6 +9,7 @@ if (isset($_POST['submit'])) {
     $status = $_POST['status'];
     $old_file = $_POST['old_file'];
     $old_file_type = $_POST['old_file_type'];
+    $c_id=$_POST['c_id'];
 
     if (isset($_FILES['file'])) {
 
@@ -24,7 +25,8 @@ if (isset($_POST['submit'])) {
             if (!$upload) {
                 // failed to upload
                 $_SESSION['update_file_error'] = "Failed To Upload The File.";
-                header('location: assignments.php');
+                echo "<script> window.location.replace('assignments.php?id=".$c_id."'); </script>";
+    
                 die();
             }
 
@@ -36,8 +38,8 @@ if (isset($_POST['submit'])) {
                 if (!$remove) {
                     // failed to remove current file
                     $_SESSION['update_assignment_error'] = "Failed To Remove The Current File.";
-                    header('location: ' . SITEURL . './assignments.php');
-                    die();
+                    echo "<script> window.location.replace('assignments.php?id=".$c_id."'); </script>";
+                        die();
                 }
             }
 
@@ -45,7 +47,7 @@ if (isset($_POST['submit'])) {
                 // Get the file type
                 $file_type = $_FILES['file']['type'];
             }else{
-                header("Location: ./assignments.php");
+                echo "<script> window.location.replace('assignments.php?id=".$c_id."'); </script>";
     
             }
 
@@ -76,14 +78,16 @@ if (isset($_POST['submit'])) {
         if($res==true){
 
             $_SESSION['update_image-ok'] = "Success"; 
-            header('location:assignments.php');
+            echo "<script> window.location.replace('assignments.php?id=".$c_id."'); </script>";
+    
         
         }
         else
         {
             //failed to update
             $_SESSION['update_image-error'] = "Error";
-            header('location:assignments.php');
+            echo "<script> window.location.replace('assignments.php?id=".$c_id."'); </script>";
+    
         }
 
     }

@@ -11,7 +11,7 @@ if ($conn->connect_error) {
 }
 
 
-$query = "SELECT `name`, `email`, `nic`, `username`,`phone`, `status` FROM `tb_teacher`";
+$query = "SELECT `name`, `email`, `nic`, `username`,`phone`, `status` FROM `tb_teacher` where user_type='LMS'";
 $result = mysqli_query($conn, $query);
 
 $data = array();

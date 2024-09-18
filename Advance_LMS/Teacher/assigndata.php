@@ -13,7 +13,7 @@ if ($conn->connect_error) {
 $c_id = $_GET['cid'];  
 
 // Use prepared statements to prevent SQL injection
-$query = "SELECT `act_id`, `act_name`, `deadline`, `status`,`c_id` FROM `tb_activity` WHERE `c_id` = ? ";
+$query = "SELECT `act_id`, `act_name`, `deadline`, `status`,`c_id` FROM `tb_activity` WHERE `c_id` = ? and act_type='assignment'";
 $stmt = $conn->prepare($query);
 $stmt->bind_param("s", $c_id); 
 $stmt->execute();

@@ -10,7 +10,7 @@
                             <?php
                         
                         $t_id = $_SESSION['tchr_id'];
-                        $sqls = "SELECT * FROM `tb_courses` where t_id='$t_id'";
+                        $sqls = "SELECT * FROM `tb_courses` where t_id='$t_id' and c_type='lms'";
 
                         $resultq = $conn->query($sqls);
 

@@ -4,30 +4,31 @@ include('config/constant.php');
     if(isset($_POST['submit'])){
         $act_name = $_POST['assignment_name'];
         $c_id = $_POST['c_id'];
+        $type = $_POST['type'];
         $content = $_POST['content'];
         $deadline = $_POST['deadline'];
         $status = $_POST['status'];
 
-        //Creating ID
-        $sql = "SELECT act_id FROM tb_activity ORDER BY act_id DESC LIMIT 1";
 
-        $result = $conn->query($sql);
-        
+        $sql = "SELECT MAX(CAST(SUBSTRING(act_id, 4) AS UNSIGNED)) AS max_id FROM tb_activity WHERE act_id LIKE 'ACT%'";
+
+        $result = mysqli_query($conn, $sql);
+
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
-            $lastData = $row['act_id'];
-        
+            $last_id_number = $row["max_id"];
+            
+            // Increment the last ACT... number
+            $next_id_number = $last_id_number + 1;
+            
+            // Construct the next ACT... value
+            $next_id = "ACT" . $next_id_number;
+            
         } else {
-            $lastData = "ACT0";
+            $next_id = "ACT1";
         }
 
 
-        $string = $lastData;
-        preg_match_all('/\d+/', $string, $matches);
-        $number = implode('', $matches[0]);
-        $number++;
-        $act = "ACT";
-        $act_id = $act.$number;
 
         //Take current date and time
         date_default_timezone_set('Asia/Colombo');
@@ -64,19 +65,19 @@ include('config/constant.php');
             // Get the file type
             $file_type = $_FILES['file']['type'];
         }else{
-            header("Location: ./add-lesson.php");
-
+            
+            echo "<script> window.location.replace('add-assignment.php?id=".$c_id."'); </script>";
         }
 
                 
         $sql2 = "INSERT INTO tb_activity SET
-            act_id = '$act_id',
+            act_id = '$next_id',
             act_name = '$act_name',
             c_id = '$c_id',
             file_name = '$newFileName',
             file_type = '$file_type',
             content = '$content',
-            act_type = 'assignment',
+            act_type = '$type',
             deadline = '$deadline',
             created = '$currentDateTime',
             status = '$status'
@@ -98,30 +99,32 @@ include('config/constant.php');
             if (!is_dir($fullPath)) {
                 // Attempt to create the folder
                 if (mkdir($fullPath, 0777, true)) {
-                    echo "Successfully created.";
+                    
+                    $_SESSION['add-ok'] = "OK";
+                    echo "<script> window.location.replace('add-assignment.php?id=".$c_id."'); </script>";
+
                 } else {
-                    echo "Failed to create the folder.";
+                    
+                    $_SESSION['add-error'] = "error";
+                    echo "<script> window.location.replace('add-assignment.php?id=".$c_id."'); </script>";
                 }
             } else {
-                echo "Folder '$folderName' already exists at '$directoryPath'.";
+
+                $_SESSION['add-error'] = "error";
+                echo "<script> window.location.replace('add-assignment.php?id=".$c_id."'); </script>";
             }
 
         }
         else
         {
-            echo "Failed";
-            //failed to insert data
-            // $_SESSION['add-error'] = "error";
-            // header('location: admin.php');
-            
+            $_SESSION['add-error'] = "error";
+            echo "<script> window.location.replace('add-assignment.php?id=".$c_id."'); </script>";
         }
-        //redirect with message to manage food page
+        
     }else{
 
-        echo "Not submitted";
-        
-    //     $_SESSION['add-error'] = "error";
-    //     header('location: admin.php');
+        $_SESSION['add-error'] = "error";
+        echo "<script> window.location.replace('add-assignment.php?id".$c_id."'); </script>";
     
     }
 ?>

@@ -28,7 +28,7 @@ if (isset($_POST['submit'])) {
             if (!$upload) {
                 // failed to upload
                 $_SESSION['update_file_error'] = "<div class='error'>Failed To Upload The File.</div></br></br>";
-                header('location: course.php');
+                echo "<script> window.location.replace('course.php?id=".$c_id."'); </script>";
                 die();
             }
 
@@ -43,7 +43,7 @@ if (isset($_POST['submit'])) {
                 if (!$remove) {
                     // failed to remove current file
                     $_SESSION['update_lesson_error'] = "<div class='error'>Failed To Remove The Current File.</div></br></br>";
-                    header('location: ' . SITEURL . './course.php');
+                    echo "<script> window.location.replace('course.php?id=".$c_id."'); </script>";
                     die();
                 }
             }
@@ -52,7 +52,7 @@ if (isset($_POST['submit'])) {
                 // Get the file type
                 $file_type = $_FILES['file']['type'];
             }else{
-                header("Location: ./course.php");
+                echo "<script> window.location.replace('course.php?id=".$c_id."'); </script>";
     
             }
 
@@ -81,14 +81,14 @@ if (isset($_POST['submit'])) {
         if($res==true){
 
             $_SESSION['update_image-ok'] = "<div class='success'>Ok</div></br></br>"; 
-            header('location:course.php');
+            echo "<script> window.location.replace('course.php?id=".$c_id."'); </script>";
         
         }
         else
         {
             //failed to update
             $_SESSION['update_image-error'] = "<div class='error'>Error</div></br></br>";
-            header('location:course.php');
+            echo "<script> window.location.replace('course.php?id=".$c_id."'); </script>";
         }
 
     }

@@ -3,7 +3,7 @@ include('config/constant.php');
 
 if (isset($_GET['id'])) {
     $file = $_GET['id'];
-
+    $c_id = $_GET['c_id'];
     $filePath = "./lessons/" . $file;
 
     if (file_exists($filePath)) {
@@ -19,7 +19,7 @@ if (isset($_GET['id'])) {
         </script>
 
         <?php
-        //echo '<meta http-equiv="refresh" content="0;url=./course.php">';
+         echo '<meta http-equiv="refresh" content="0;url=./course.php?id=' . $c_id.'">';
         ?>
 
 

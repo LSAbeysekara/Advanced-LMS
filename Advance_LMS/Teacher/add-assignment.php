@@ -5,22 +5,28 @@ session_start();
 include('config/constant.php');
 $c_id = $_GET['id'];
  if (!isset($_SESSION['teacher_name'])) {
-    echo "<script> window.location.replace('http://localhost:3000/t_login'); </script>";
+    echo "<script> window.location.replace('http://localhost:3000/login'); </script>";
   } else {
   
     ?>
-
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     
-
-    <title>Add Assignment</title>
+    <!-- theme meta -->
+    
+  
+    <title>Dashboard</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="images/logo.jpg">
-
+    <!-- Pignose Calender -->
+    <link href="./plugins/pg-calendar/css/pignose.calendar.min.css" rel="stylesheet">
+    <!-- Chartist -->
+    <link rel="stylesheet" href="./plugins/chartist/css/chartist.min.css">
+    <link rel="stylesheet" href="./plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css">
+    <!-- Custom Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
 
     <script src="https://cdn.tiny.cloud/1/ipootvjlv9vz4p1d1x91ok27oce25gt4no6r0tddj5c98lsw/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
@@ -49,7 +55,7 @@ $c_id = $_GET['id'];
     ***********************************-->
     <div id="main-wrapper">
 
- 
+      
         <!--**********************************
             Header start
         ***********************************-->
@@ -68,6 +74,10 @@ $c_id = $_GET['id'];
         <!--**********************************
             Content body start
         ***********************************-->
+
+        <!--**********************************
+            Content body start
+        ***********************************-->
         <div class="content-body">
             <div class="container-fluid">
                 <div class="row justify-content-center">
@@ -81,7 +91,18 @@ $c_id = $_GET['id'];
                                                 <label class="col-lg-4 col-form-label">Assignment Name <span class="text-danger">*</span>
                                                 </label>
                                                 <div class="col-lg-6">
-                                                    <input type="text" class="form-control" id="assignment_name" name="assignment_name" placeholder="Enter lesson name.." required>
+                                                    <input type="text" class="form-control" id="assignment_name" name="assignment_name" placeholder="Enter assignment name.." required>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-lg-4 col-form-label">Type <span class="text-danger">*</span></label>
+                                                <div class="col-lg-6">
+                                                    <select name="type" id="type">
+                                                        <option value="">Select type</option>
+                                                        <option value="assignment">Assignment</option>
+                                                        <option value="PP">Past Paper</option>
+                                                        <option value="EL">Eligibility list</option>
+                                                    </select>    
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -91,15 +112,15 @@ $c_id = $_GET['id'];
                                                     <input type="file" name="file" accept=".pdf, .docx, .doc, .pptx, .pptx, .xlsx, .xls, .jpg, .jpeg, .png, .gif, .mp3, .wav, .mp4, .mov, .txt, .py, .java, .html, .css, .js, .epub, .mobi, .csv, .one" required>
                                                 </div>
                                             </div>
-                                            <div class="form-group row">
+                                            <div class="form-group row" id="deadline-group">
                                                 <label class="col-lg-4 col-form-label">Deadline<span class="text-danger">*</span>
                                                 </label>
                                                 <div class="col-lg-6">
                                                     <?php date_default_timezone_set('Asia/Colombo'); ?>
-                                                   <input type="datetime-local" name="deadline" required>
+                                                   <input type="datetime-local" name="deadline">
                                                 </div>
                                             </div>
-                                            <div class="form-group row">
+                                            <div class="form-group row" id="content-group">
                                                 <label class="col-lg-4 col-form-label">Content<span class="text-danger">*</span>
                                                 </label>
                                                 <div class="col-lg-6">
@@ -114,8 +135,8 @@ $c_id = $_GET['id'];
                                                 </label>
                                                 <div class="col-lg-6">
                                                     <select name="status" class="form-control" required>
-                                                        <option value="active">Active</option>
-                                                        <option value="inactive">Inactive</option>
+                                                        <option value="Active">Active</option>
+                                                        <option value="Inactive">Inactive</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -145,6 +166,8 @@ $c_id = $_GET['id'];
     <!--**********************************
         Scripts
     ***********************************-->
+
+
     <script src="plugins/common/common.min.js"></script>
     <script src="js/custom.min.js"></script>
     <script src="js/settings.js"></script>
@@ -167,7 +190,7 @@ $c_id = $_GET['id'];
 </script>
 
 
-  
+    <script src="./js/dashboard/dashboard-1.js"></script>
 
 </body>
 

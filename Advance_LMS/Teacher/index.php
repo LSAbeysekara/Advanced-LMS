@@ -13,7 +13,7 @@ $_SESSION['tchr_id'] = $tchr_id;
 <html lang="en">
 
 <?php if (!isset($_SESSION['teacher_name'])) {
-    echo "<script> window.location.replace('http://localhost:3000/t_login'); </script>";
+    echo "<script> window.location.replace('http://localhost:3000/login'); </script>";
 } else {
 
 ?>
@@ -78,7 +78,7 @@ $_SESSION['tchr_id'] = $tchr_id;
                             <?php
                         include('config/constant.php');
                         $t_id = $_SESSION['tchr_id'];
-                        $sqls = "SELECT * FROM `tb_courses` where t_id='$t_id'";
+                        $sqls = "SELECT * FROM `tb_courses` where t_id='$t_id' and c_type='lms'";
 
                         $resultq = $conn->query($sqls);
 
@@ -112,7 +112,7 @@ $_SESSION['tchr_id'] = $tchr_id;
                         <?php
                         // include('config/constant.php');
                         // $t_id = $_SESSION['tchr_id'];
-                        $sql = "SELECT * FROM `tb_courses` where t_id='$t_id'";
+                        $sql = "SELECT * FROM `tb_courses` where t_id='$t_id' and c_type='lms'";
 
                         $result = $conn->query($sql);
 
@@ -154,7 +154,7 @@ $_SESSION['tchr_id'] = $tchr_id;
                 <script src="js/styleSwitcher.js"></script>
 
 
-                <script src="./js/dashboard/dashboard-1.js"></script>
+                
 
     </body>
 

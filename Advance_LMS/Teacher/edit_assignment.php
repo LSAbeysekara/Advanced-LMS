@@ -4,7 +4,7 @@ session_start();
 
 
  if (!isset($_SESSION['teacher_name'])) {
-    echo "<script> window.location.replace('http://localhost:3000/t_login'); </script>";
+    echo "<script> window.location.replace('http://localhost:3000/login'); </script>";
   } else {
     $c_id = $_GET['id'];
     ?>
@@ -160,7 +160,7 @@ session_start();
                                                     </select>
                                                 </div>
                                             </div>
-                                            
+                                            <input type="hidden" name="c_id" value="<?php echo $c_id; ?>">
                                             <input type="hidden" name="act_id" value="<?php echo $act_id; ?>">
                                             <input type="hidden" name="old_file" value="<?php echo $file_name; ?>">
                                             <input type="hidden" name="old_file_type" value="<?php echo $file_type; ?>">

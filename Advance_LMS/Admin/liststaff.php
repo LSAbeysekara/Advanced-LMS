@@ -3,7 +3,7 @@
 <?php 
 session_start();
 if (!isset($_SESSION['admin_name'])) {
-    echo "<script> window.location.replace('http://localhost:3000/admin'); </script>";
+    echo "<script> window.location.replace('http://localhost:3000/login'); </script>";
 } else {
     
     ?>

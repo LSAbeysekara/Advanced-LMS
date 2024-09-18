@@ -10,20 +10,41 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT * FROM `tb_courses`"; 
-$result = $conn->query($sql);
+$searchTerm = '%' . $_GET['term'] . '%';
 
-$teachers = array();
+$sql = "SELECT * FROM `tb_courses` WHERE c_name LIKE ? and c_type='lms'";
+$stmt = $conn->prepare($sql);
 
-// while ($row = $result->fetch_assoc()) {
-//     $teachers[] = $row;
-// }
+
+if ($stmt === false) {
+    die("Error in preparing statement");
+}
+
+$stmt->bind_param("s", $searchPattern);
+$searchPattern = $searchTerm;
+
+
+$stmt->execute();
+
+
+$result = $stmt->get_result();
+
+$courses = array();
+
 
 while ($row = $result->fetch_assoc()) {
-    $teachers[] = array(
+    $courses[] = array(
         'id' => $row['c_id'],
         'text' => $row['c_name']
     );
 }
-echo json_encode($teachers);
+
+
+$stmt->close();
+
+
+$conn->close();
+
+// Output the JSON results
+echo json_encode(['results' => $courses]);
 ?>
